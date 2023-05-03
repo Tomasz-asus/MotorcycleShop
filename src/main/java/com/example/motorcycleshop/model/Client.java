@@ -14,14 +14,14 @@ public class Client {
     private Basket basket = new Basket();
 
     @OneToMany
-    private List<Order> orders = new ArrayList<>();
+    private List<OrderCart> orderCarts = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String name;
+    private String clientName;
 
-    private String username;
+    private String userName;
 
     private String password;
 
@@ -33,10 +33,10 @@ public class Client {
     public Client() {
     }
 
-    public Client(Long id, String name, String username, String password, Collection<Role> roles) {
+    public Client(Long id, String clientName, String userName, String password, Collection<Role> roles) {
         this.id = id;
-        this.name = name;
-        this.username = username;
+        this.clientName = clientName;
+        this.userName = userName;
         this.password = password;
         this.roles = roles;
     }
@@ -57,20 +57,20 @@ public class Client {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -97,11 +97,11 @@ public class Client {
         this.basket = basket;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public List<OrderCart> getOrders() {
+        return orderCarts;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrders(List<OrderCart> orderCarts) {
+        this.orderCarts = orderCarts;
     }
 }

@@ -47,4 +47,8 @@ public class Basket {
     public void setMotorcycles(List<Motorcycle> motorcycles) {
         this.motorcycles = motorcycles;
     }
+
+    public void removeMotorcycleFromBasket(Motorcycle motorcycle) {
+        motorcycles.remove(motorcycle);
+    }
 }

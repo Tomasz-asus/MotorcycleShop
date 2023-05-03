@@ -12,7 +12,7 @@ public class Motorcycle {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String name;
+    private String motorcycleName;
     private String description;
 
     private Double price;
@@ -27,8 +27,8 @@ public class Motorcycle {
     public Motorcycle() {
     }
 
-    public Motorcycle(String name, String description, Double price, String yearOfManufacture, String imageUrl, MotorcycleTyp motorcycleTyp) {
-        this.name = name;
+    public Motorcycle(String motorcycleName, String description, Double price, String yearOfManufacture, String imageUrl, MotorcycleTyp motorcycleTyp) {
+        this.motorcycleName = motorcycleName;
         this.description = description;
         this.price = price;
         this.yearOfManufacture = yearOfManufacture;
@@ -44,12 +44,12 @@ public class Motorcycle {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getMotorcycleName() {
+        return motorcycleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMotorcycleName(String motorcycleName) {
+        this.motorcycleName = motorcycleName;
     }
 
     public String getDescription() {
@@ -96,19 +96,19 @@ public class Motorcycle {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Motorcycle that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getYearOfManufacture(), that.getYearOfManufacture()) && Objects.equals(getImageUrl(), that.getImageUrl()) && getMotorcycleTyp() == that.getMotorcycleTyp();
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getMotorcycleName(), that.getMotorcycleName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getYearOfManufacture(), that.getYearOfManufacture()) && Objects.equals(getImageUrl(), that.getImageUrl()) && getMotorcycleTyp() == that.getMotorcycleTyp();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getDescription(), getPrice(), getYearOfManufacture(), getImageUrl(), getMotorcycleTyp());
+        return Objects.hash(getId(), getMotorcycleName(), getDescription(), getPrice(), getYearOfManufacture(), getImageUrl(), getMotorcycleTyp());
     }
 
     @Override
     public String toString() {
         return "Motorcycle{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + motorcycleName + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", yearOfManufacture='" + yearOfManufacture + '\'' +

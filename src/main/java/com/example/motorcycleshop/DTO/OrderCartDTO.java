@@ -3,7 +3,7 @@ package com.example.motorcycleshop.DTO;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class OrderDTO {
+public class OrderCartDTO {
 
 
     private String firstAndLastName;
@@ -14,23 +14,23 @@ public class OrderDTO {
 
     private LocalDateTime orderDate;
 
-    private String username;
+    private String userNameOfOrder;
 
     private String basketName;
 
-    public OrderDTO(String firstAndLastName,
-                    String street,
-                    String city,
-                    Integer phone,
-                    LocalDateTime orderDate,
-                    String username,
-                    String basketName) {
+    public OrderCartDTO(String firstAndLastName,
+                        String street,
+                        String city,
+                        Integer phone,
+                        LocalDateTime orderDate,
+                        String userNameOfOrder,
+                        String basketName) {
         this.firstAndLastName = firstAndLastName;
         this.street = street;
         this.city = city;
         this.phone = phone;
         this.orderDate = orderDate;
-        this.username = username;
+        this.userNameOfOrder = userNameOfOrder;
         this.basketName = basketName;
     }
 
@@ -74,12 +74,12 @@ public class OrderDTO {
         this.orderDate = orderDate;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserNameOfOrder() {
+        return userNameOfOrder;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserNameOfOrder(String userNameOfOrder) {
+        this.userNameOfOrder = userNameOfOrder;
     }
 
     public String getBasketName() {
@@ -93,12 +93,12 @@ public class OrderDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderDTO orderDTO)) return false;
-        return Objects.equals(getFirstAndLastName(), orderDTO.getFirstAndLastName()) && Objects.equals(getStreet(), orderDTO.getStreet()) && Objects.equals(getCity(), orderDTO.getCity()) && Objects.equals(getPhone(), orderDTO.getPhone()) && Objects.equals(getOrderDate(), orderDTO.getOrderDate()) && Objects.equals(getUsername(), orderDTO.getUsername()) && Objects.equals(getBasketName(), orderDTO.getBasketName());
+        if (!(o instanceof OrderCartDTO orderCartDTO)) return false;
+        return Objects.equals(getFirstAndLastName(), orderCartDTO.getFirstAndLastName()) && Objects.equals(getStreet(), orderCartDTO.getStreet()) && Objects.equals(getCity(), orderCartDTO.getCity()) && Objects.equals(getPhone(), orderCartDTO.getPhone()) && Objects.equals(getOrderDate(), orderCartDTO.getOrderDate()) && Objects.equals(getUserNameOfOrder(), orderCartDTO.getUserNameOfOrder()) && Objects.equals(getBasketName(), orderCartDTO.getBasketName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstAndLastName(), getStreet(), getCity(), getPhone(), getOrderDate(), getUsername(), getBasketName());
+        return Objects.hash(getFirstAndLastName(), getStreet(), getCity(), getPhone(), getOrderDate(), getUserNameOfOrder(), getBasketName());
     }
 }

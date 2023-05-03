@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Order {
+public class OrderCart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,22 +23,22 @@ public class Order {
 
     private LocalDateTime orderDate;
 
-    private String username;
+    private String userNameOfOrder;
 
     private String basketName;
 
-    public Order() {
+    public OrderCart() {
     }
 
-    public Order(Long id,
-                 List<Motorcycle> motorcycles,
-                 String firstAndLastName,
-                 String street,
-                 String city,
-                 Integer phone,
-                 LocalDateTime orderDate,
-                 String username,
-                 String basketName) {
+    public OrderCart(Long id,
+                     List<Motorcycle> motorcycles,
+                     String firstAndLastName,
+                     String street,
+                     String city,
+                     Integer phone,
+                     LocalDateTime orderDate,
+                     String userNameOfOrder,
+                     String basketName) {
         this.id = id;
         this.motorcycles = motorcycles;
         this.firstAndLastName = firstAndLastName;
@@ -46,9 +46,13 @@ public class Order {
         this.city = city;
         this.phone = phone;
         this.orderDate = orderDate;
-        this.username = username;
+        this.userNameOfOrder = userNameOfOrder;
         this.basketName = basketName;
     }
+
+    public OrderCart(String basketName, String firstAndLastName, String street, String city, LocalDateTime orderDate, Integer phone, String userNameOfOrder, List<Motorcycle> motorcycles) {
+    }
+
 
     public Long getId() {
         return id;
@@ -106,12 +110,12 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserNameOfOrder() {
+        return userNameOfOrder;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserNameOfOrder(String userNameOfOrder) {
+        this.userNameOfOrder = userNameOfOrder;
     }
 
     public String getBasketName() {

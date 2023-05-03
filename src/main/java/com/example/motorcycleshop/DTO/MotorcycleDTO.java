@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class MotorcycleDTO {
 
-    private String name;
+    private String motorcycleName;
     private String description;
 
     private Double price;
@@ -17,8 +17,8 @@ public class MotorcycleDTO {
 
     private MotorcycleTyp motorcycleTyp;
 
-    public MotorcycleDTO(String name, String description, Double price, String yearOfManufacture, String imageUrl, MotorcycleTyp motorcycleTyp) {
-        this.name = name;
+    public MotorcycleDTO(String motorcycleName, String description, Double price, String yearOfManufacture, String imageUrl, MotorcycleTyp motorcycleTyp) {
+        this.motorcycleName = motorcycleName;
         this.description = description;
         this.price = price;
         this.yearOfManufacture = yearOfManufacture;
@@ -26,12 +26,12 @@ public class MotorcycleDTO {
         this.motorcycleTyp = motorcycleTyp;
     }
 
-    public String getName() {
-        return name;
+    public String getMotorcycleName() {
+        return motorcycleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMotorcycleName(String motorcycleName) {
+        this.motorcycleName = motorcycleName;
     }
 
     public String getDescription() {
@@ -78,11 +78,11 @@ public class MotorcycleDTO {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof MotorcycleDTO that)) return false;
-        return Objects.equals(getName(), that.getName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getYearOfManufacture(), that.getYearOfManufacture()) && Objects.equals(getImageUrl(), that.getImageUrl()) && getMotorcycleTyp() == that.getMotorcycleTyp();
+        return Objects.equals(getMotorcycleName(), that.getMotorcycleName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getYearOfManufacture(), that.getYearOfManufacture()) && Objects.equals(getImageUrl(), that.getImageUrl()) && getMotorcycleTyp() == that.getMotorcycleTyp();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getDescription(), getPrice(), getYearOfManufacture(), getImageUrl(), getMotorcycleTyp());
+        return Objects.hash(getMotorcycleName(), getDescription(), getPrice(), getYearOfManufacture(), getImageUrl(), getMotorcycleTyp());
     }
 }

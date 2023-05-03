@@ -11,5 +11,9 @@ public interface MotorcycleRepository extends JpaRepository<Motorcycle, Long> {
 
     Optional<Motorcycle> findById(Long id);
 
-    Optional<Motorcycle> findByName(String name);
+    Optional<Motorcycle> findByMotorcycleName(String motorcycleName);
+
+    void deleteByMotorcycleName(String motorcycleName);
+
+
 }

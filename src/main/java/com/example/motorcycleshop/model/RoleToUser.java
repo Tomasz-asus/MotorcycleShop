@@ -2,21 +2,21 @@ package com.example.motorcycleshop.model;
 
 public class RoleToUser {
 
-    private String username;
+    private String userRoleName;
 
     private String roleName;
 
-    public RoleToUser(String username, String roleName) {
-        this.username = username;
+    public RoleToUser(String userRoleName, String roleName) {
+        this.userRoleName = userRoleName;
         this.roleName = roleName;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserRoleName() {
+        return userRoleName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserRoleName(String userRoleName) {
+        this.userRoleName = userRoleName;
     }
 
     public String getRoleName() {
