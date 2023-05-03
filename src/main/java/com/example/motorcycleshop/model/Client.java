@@ -25,6 +25,8 @@ public class Client {
 
     private String password;
 
+    private String verificationCode;
+
     @ManyToMany
     private Collection<Role> roles = new ArrayList<>();
 
@@ -37,6 +39,14 @@ public class Client {
         this.username = username;
         this.password = password;
         this.roles = roles;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     public Long getId() {
