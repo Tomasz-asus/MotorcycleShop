@@ -15,4 +15,36 @@ public class Basket {
     private List<Motorcycle> motorcycles = new ArrayList<>();
 
 
+    public Basket() {
+    }
+
+    public Basket(Long id, String basketName, List<Motorcycle> motorcycles) {
+        this.id = id;
+        this.basketName = basketName;
+        this.motorcycles = motorcycles;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getBasketName() {
+        return basketName;
+    }
+
+    public void setBasketName(String basketName) {
+        this.basketName = basketName;
+    }
+
+    public List<Motorcycle> getMotorcycles() {
+        return motorcycles;
+    }
+
+    public void setMotorcycles(List<Motorcycle> motorcycles) {
+        this.motorcycles = motorcycles;
+    }
 }
