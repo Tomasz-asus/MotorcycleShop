@@ -42,14 +42,14 @@ public class MotorcycleService {
         if(motorcycleRepository.findByMotorcycleName(motorcycleDTO.getMotorcycleName()).isPresent()){
             throw new RuntimeException("Motorcycle already exist");
         } else{
-            Motorcycle save = motorcycleRepository.save(MotorcycleMapper.fromDTO(motorcycleDTO));
-            return MotorcycleMapper.fromEntity(save);
+            Motorcycle save = motorcycleRepository.save(MotorcycleMapper.fromDTOToMotorcycle(motorcycleDTO));
+            return MotorcycleMapper.fromEntityToMotorcycleDTO(save);
         }
     }
     public List<MotorcycleDTO> getAllMotorcycles() {
         return motorcycleRepository.findAll()
                 .stream()
-                .map(MotorcycleMapper::fromEntity)
+                .map(MotorcycleMapper::fromEntityToMotorcycleDTO)
                 .collect(Collectors.toList());
     }
     public void deleteMotorcycle(String motorcycleName){
@@ -63,12 +63,12 @@ public class MotorcycleService {
     public List<Basket> getAllBaskets(){
         return basketRepository.findAll();
     }
-    public void deleteBasket(String name){
-        basketRepository.deleteByBasketName(name);
+    public void deleteBasket(String basketName){
+        basketRepository.deleteByBasketName(basketName);
     }
     public OrderCartDTO addOrderCart(OrderCartDTO orderCartDTO){
 
-        OrderCart save = orderCartRepository.save(OrderCartMapper.fromDTO(orderCartDTO));
+        OrderCart save = orderCartRepository.save(MotorcycleMapper.fromDTOToOrderCart(orderCartDTO));
         Client client = clientRepository.findByClientName(orderCartDTO.getUserNameOfOrder())
                 .orElseThrow(()-> new UserNotFoundException("User" +orderCartDTO.getUserNameOfOrder() + "not found."));
 
@@ -79,10 +79,7 @@ public class MotorcycleService {
         client.setBasket(basketRepository.findByBasketName(customBasket)
                 .orElseThrow(()->new BasketNotFoundException("Basket" + customBasket+"was not found.")));
         clientRepository.save(client);
-        return OrderCartMapper.fromEntity(save);
-    }
-    public List<OrderCart> getAllOrderCart(){
-        return orderCartRepository.findAll();
+        return MotorcycleMapper.fromEntityToOrderCartDTO(save);
     }
     public void deleteOrderCard(String userNameOfOrder){
         orderCartRepository.deleteByUserNameOfOrder(userNameOfOrder);
