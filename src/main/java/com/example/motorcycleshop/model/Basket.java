@@ -21,7 +21,7 @@ public class Basket {
     public Basket() {
     }
 
-    public Basket(Long id, String basketName, List<Motorcycle> motorcycles) {
+    public Basket(String basketName) {
         this.id = id;
         this.basketName = basketName;
         this.motorcycles = motorcycles;

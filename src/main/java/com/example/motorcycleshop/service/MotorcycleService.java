@@ -4,7 +4,7 @@ import com.example.motorcycleshop.DTO.MotorcycleDTO;
 import com.example.motorcycleshop.DTO.OrderCartDTO;
 import com.example.motorcycleshop.exceptions.BasketNotFoundException;
 import com.example.motorcycleshop.exceptions.MotorcycleNotFoundException;
-import com.example.motorcycleshop.exceptions.UserNotFoundException;
+import com.example.motorcycleshop.exceptions.ClientNotFoundException;
 import com.example.motorcycleshop.model.Basket;
 import com.example.motorcycleshop.model.Client;
 import com.example.motorcycleshop.model.Motorcycle;
@@ -71,11 +71,11 @@ public class MotorcycleService {
 
         OrderCart save = orderCartRepository.save(MotorcycleMapper.fromDTOToOrderCart(orderCartDTO));
         Client client = clientRepository.findByClientName(orderCartDTO.getUserNameOfOrder())
-                .orElseThrow(()-> new UserNotFoundException("User" +orderCartDTO.getUserNameOfOrder() + "not found."));
+                .orElseThrow(()-> new ClientNotFoundException("User" +orderCartDTO.getUserNameOfOrder() + "not found."));
 
         client.getOrders().add(save);
         String customBasket = generate(20);
-        Basket basket = new Basket();
+        Basket basket = new Basket(customBasket);
         basketRepository.save(basket);
         client.setBasket(basketRepository.findByBasketName(customBasket)
                 .orElseThrow(()->new BasketNotFoundException("Basket" + customBasket+"was not found.")));

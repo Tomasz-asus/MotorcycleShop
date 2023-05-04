@@ -22,11 +22,11 @@ public class Client {
     private Long id;
     private String clientName;
 
-    private String userName;
-
     private String password;
 
     private String verificationCode;
+
+    private boolean isVerified = false;
 
     @ManyToMany
     private Collection<Role> roles = new ArrayList<>();
@@ -34,10 +34,9 @@ public class Client {
     public Client() {
     }
 
-    public Client(Long id, String clientName, String userName, String password, Collection<Role> roles) {
+    public Client(Long id, String clientName, String password, Collection<Role> roles) {
         this.id = id;
         this.clientName = clientName;
-        this.userName = userName;
         this.password = password;
         this.roles = roles;
     }
@@ -64,14 +63,6 @@ public class Client {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getPassword() {
@@ -104,5 +95,13 @@ public class Client {
 
     public void setOrders(List<OrderCart> orderCarts) {
         this.orderCarts = orderCarts;
+    }
+
+    public boolean isVerified() {
+        return isVerified;
+    }
+
+    public void setVerified(boolean verified) {
+        isVerified = verified;
     }
 }
