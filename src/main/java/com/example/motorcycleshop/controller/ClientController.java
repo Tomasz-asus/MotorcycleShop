@@ -9,7 +9,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,12 +24,14 @@ public class ClientController {
 private final ClientService clientService;
 
     public ClientController(ClientService clientService) {
+
         this.clientService = clientService;
     }
 
     @PostMapping("/client")
     @ResponseBody()
-    public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+    public ResponseEntity<?> registerClient(@RequestBody Client client, HttpServletRequest request)
+            throws MessagingException, UnsupportedEncodingException {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/client/save").toUriString());
         clientService.registerClient(client, getSiteURL(request));
         return ResponseEntity.created(uri).body(JSONObject.quote("Client saved"));
@@ -42,21 +43,27 @@ private final ClientService clientService;
     @GetMapping("/verify")
     public ResponseEntity<String> verifyClient(@Param("code") String code){
         if(clientService.verify(code)){
-            return ResponseEntity.ok().body("verify_ok");
+            return ResponseEntity
+                    .ok()
+                    .body("verify_ok");
         }else{
             return ResponseEntity.badRequest().body("verify_fail");
         }
     }
     @GetMapping("/clients")
     public ResponseEntity<List<Client>>getClients(){
+
         return ResponseEntity.ok().body(clientService.getClients());
     }
     @PostMapping("/role")
     public ResponseEntity<Role> saveRole(@RequestBody Role role){
-        URI uri =URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
+        URI uri =URI.create(ServletUriComponentsBuilder
+                .fromCurrentContextPath()
+                .path("/api/role/save")
+                .toUriString());
         return ResponseEntity.created(uri).body(clientService.saveRole(role));
     }
-    @PostMapping("/role/client")
+    @PostMapping("/role/toClient")
     public ResponseEntity<?>addRoleToClient(@RequestBody RoleToUser role){
         clientService.addRoleToClient(role.getRoleName(),role.getUserName());
         return ResponseEntity.ok().build();

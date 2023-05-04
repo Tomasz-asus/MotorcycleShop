@@ -38,67 +38,45 @@ public class OrderCartDTO {
         return firstAndLastName;
     }
 
-    public void setFirstAndLastName(String firstAndLastName) {
-        this.firstAndLastName = firstAndLastName;
-    }
-
     public String getStreet() {
         return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
     }
 
     public String getCity() {
         return city;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public Integer getPhone() {
         return phone;
-    }
-
-    public void setPhone(Integer phone) {
-        this.phone = phone;
     }
 
     public LocalDateTime getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
     public String getUserNameOfOrder() {
         return userNameOfOrder;
-    }
-
-    public void setUserNameOfOrder(String userNameOfOrder) {
-        this.userNameOfOrder = userNameOfOrder;
     }
 
     public String getBasketName() {
         return basketName;
     }
 
-    public void setBasketName(String basketName) {
-        this.basketName = basketName;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof OrderCartDTO orderCartDTO)) return false;
-        return Objects.equals(getFirstAndLastName(), orderCartDTO.getFirstAndLastName()) && Objects.equals(getStreet(), orderCartDTO.getStreet()) && Objects.equals(getCity(), orderCartDTO.getCity()) && Objects.equals(getPhone(), orderCartDTO.getPhone()) && Objects.equals(getOrderDate(), orderCartDTO.getOrderDate()) && Objects.equals(getUserNameOfOrder(), orderCartDTO.getUserNameOfOrder()) && Objects.equals(getBasketName(), orderCartDTO.getBasketName());
+        OrderCartDTO that = (OrderCartDTO) o;
+        return Objects.equals(userNameOfOrder, that.userNameOfOrder)
+                && Objects.equals(firstAndLastName, that.firstAndLastName)
+                && Objects.equals(basketName, that.basketName)
+                && Objects.equals(street, that.street)
+                && Objects.equals(city, that.city)
+                && Objects.equals(phone, that.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getFirstAndLastName(), getStreet(), getCity(), getPhone(), getOrderDate(), getUserNameOfOrder(), getBasketName());
+        return Objects.hash(userNameOfOrder, firstAndLastName, basketName, street, city, phone);
     }
 }

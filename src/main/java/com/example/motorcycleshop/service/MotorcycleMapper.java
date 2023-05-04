@@ -45,8 +45,7 @@ public class MotorcycleMapper {
                 orderCart.getPhone(),
                 orderCart.getOrderDate(),
                 orderCart.getCity(),
-                orderCart.getUserNameOfOrder()
-        );
+                orderCart.getUserNameOfOrder());
     }
 
     private static List<Motorcycle> mappingMotorcyclesFromBasket(String basketName) {
@@ -74,8 +73,7 @@ public class MotorcycleMapper {
                 motorcycle.getPrice(),
                 motorcycle.getYearOfManufacture(),
                 motorcycle.getImageUrl(),
-                motorcycle.getMotorcycleTyp()
-        );
+                motorcycle.getMotorcycleTyp());
 
     }
 }

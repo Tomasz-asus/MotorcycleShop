@@ -30,48 +30,24 @@ public class MotorcycleDTO {
         return motorcycleName;
     }
 
-    public void setMotorcycleName(String motorcycleName) {
-        this.motorcycleName = motorcycleName;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public String getYearOfManufacture() {
         return yearOfManufacture;
-    }
-
-    public void setYearOfManufacture(String yearOfManufacture) {
-        this.yearOfManufacture = yearOfManufacture;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public MotorcycleTyp getMotorcycleTyp() {
         return motorcycleTyp;
-    }
-
-    public void setMotorcycleTyp(MotorcycleTyp motorcycleTyp) {
-        this.motorcycleTyp = motorcycleTyp;
     }
 
     @Override

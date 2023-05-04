@@ -11,3 +11,15 @@ public class MotorcycleShopApplication {
     }
 
 }
+//TODO DBFilling
+//TODO Security
+//TODO paypal
+//TODO login
+//TODO DB
+//TODO TDD
+//TODO FRONT
+//TODO MICROSERVICE
+//TODO DOCKER COMPOSE
+
+
+
