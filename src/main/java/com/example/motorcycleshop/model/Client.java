@@ -1,7 +1,8 @@
 package com.example.motorcycleshop.model;
 
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
