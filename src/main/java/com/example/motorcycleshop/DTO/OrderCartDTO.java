@@ -12,8 +12,6 @@ public class OrderCartDTO {
 
     private Integer phone;
 
-    private LocalDateTime orderDate;
-
     private String userNameOfOrder;
 
     private String basketName;
@@ -22,14 +20,12 @@ public class OrderCartDTO {
                         String street,
                         String city,
                         Integer phone,
-                        LocalDateTime orderDate,
                         String userNameOfOrder,
                         String basketName) {
         this.firstAndLastName = firstAndLastName;
         this.street = street;
         this.city = city;
         this.phone = phone;
-        this.orderDate = orderDate;
         this.userNameOfOrder = userNameOfOrder;
         this.basketName = basketName;
     }
@@ -48,10 +44,6 @@ public class OrderCartDTO {
 
     public Integer getPhone() {
         return phone;
-    }
-
-    public LocalDateTime getOrderDate() {
-        return orderDate;
     }
 
     public String getUserNameOfOrder() {

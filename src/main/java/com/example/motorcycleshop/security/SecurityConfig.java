@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers("/api/login",
-                "/motoShop/motorcycle",
+                "/motoShop/motorcycle/**",
                 "/api/role",
                 "/api/role/toClient",
                 "/api/token/refresh",

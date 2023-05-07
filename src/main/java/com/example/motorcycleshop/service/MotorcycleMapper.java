@@ -8,6 +8,7 @@ import com.example.motorcycleshop.repository.BasketRepository;
 import com.example.motorcycleshop.repository.ClientRepository;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class MotorcycleMapper {
                 orderCartDTO.getFirstAndLastName(),
                 orderCartDTO.getStreet(),
                 orderCartDTO.getCity(),
-                orderCartDTO.getOrderDate(),
+                LocalDateTime.now(),
                 orderCartDTO.getPhone(),
                 orderCartDTO.getUserNameOfOrder(),
                 mappingMotorcyclesFromBasket(orderCartDTO.getBasketName()));
@@ -43,7 +44,6 @@ public class MotorcycleMapper {
                 orderCart.getFirstAndLastName(),
                 orderCart.getStreet(),
                 orderCart.getPhone(),
-                orderCart.getOrderDate(),
                 orderCart.getCity(),
                 orderCart.getUserNameOfOrder());
     }

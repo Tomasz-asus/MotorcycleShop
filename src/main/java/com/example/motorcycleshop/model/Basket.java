@@ -35,6 +35,11 @@ generator = "basket_sequence")
         return motorcycles;
     }
 
+    public void addMotorcycleToBasket(Motorcycle motorcycle) {
+        motorcycles.add(motorcycle);
+    }
+
+
     public void removeMotorcycleFromBasket(Motorcycle motorcycle) {
         motorcycles.remove(motorcycle);
     }

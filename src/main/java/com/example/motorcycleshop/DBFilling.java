@@ -36,13 +36,13 @@ public class DBFilling {
                 "the best of Yamaha's motorcycle",
                 20000.00,
                 "2008",
-                "imageURL",
+                "D:\\IT\\Programing\\IdeaProjects\\job\\MotorcycleShop\\src\\main\\resources\\templates\\yamaha.jpg",
                 MotorcycleTyp.CRUISER));
         motorcycleShopController.addMotorcycle(new MotorcycleDTO("honda",
                 "the best of Honda's motorcycle",
                 10000.00,
                 "2007",
-                "imageURL",
+                "D:\\IT\\Programing\\IdeaProjects\\job\\MotorcycleShop\\src\\main\\resources\\templates\\Honda.jpg",
                 MotorcycleTyp.TOURING));
 
         Role admin = new Role("ADMIN");
