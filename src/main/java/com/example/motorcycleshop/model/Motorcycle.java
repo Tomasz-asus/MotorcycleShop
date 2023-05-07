@@ -5,6 +5,7 @@ package com.example.motorcycleshop.model;
 
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -12,7 +13,9 @@ import java.util.Objects;
 public class Motorcycle {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "motorcycle_sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+    generator = "motorcycle_sequence")
     private Long id;
 
     private String motorcycleName;
@@ -26,6 +29,17 @@ public class Motorcycle {
 
     @Enumerated(EnumType.STRING)
     private MotorcycleTyp motorcycleTyp;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Basket> basketList;
+
+    public List<Basket> getBasketList() {
+        return basketList;
+    }
+
+    public void setBasketList(List<Basket> basketList) {
+        this.basketList = basketList;
+    }
 
     public Motorcycle() {
     }

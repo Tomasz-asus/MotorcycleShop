@@ -34,8 +34,7 @@ public class Client {
     public Client() {
     }
 
-    public Client(Long id, String clientName, String password, Collection<Role> roles) {
-        this.id = id;
+    public Client(String clientName, String password, Collection<Role> roles) {
         this.clientName = clientName;
         this.password = password;
         this.roles = roles;
