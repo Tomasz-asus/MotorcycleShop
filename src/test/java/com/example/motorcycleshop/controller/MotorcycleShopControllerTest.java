@@ -1,9 +1,7 @@
 package com.example.motorcycleshop.controller;
 
 import com.example.motorcycleshop.DTO.MotorcycleDTO;
-import com.example.motorcycleshop.DTO.OrderCartDTO;
 import com.example.motorcycleshop.model.Basket;
-import com.example.motorcycleshop.model.Client;
 import com.example.motorcycleshop.model.Motorcycle;
 import com.example.motorcycleshop.model.MotorcycleTyp;
 import com.example.motorcycleshop.repository.BasketRepository;
@@ -11,7 +9,6 @@ import com.example.motorcycleshop.repository.ClientRepository;
 import com.example.motorcycleshop.repository.MotorcycleRepository;
 import com.example.motorcycleshop.service.MotorcycleMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,14 +20,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.example.motorcycleshop.model.MotorcycleTyp.CRUISER;
-import static com.example.motorcycleshop.model.MotorcycleTyp.SPORT;
-import static com.mysql.cj.exceptions.MysqlErrorNumbers.get;
-import static org.apache.logging.log4j.ThreadContext.isEmpty;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;

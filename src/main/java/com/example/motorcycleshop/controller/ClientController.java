@@ -65,7 +65,7 @@ private final ClientService clientService;
     }
     @PostMapping("/role/toClient")
     public ResponseEntity<?>addRoleToClient(@RequestBody RoleToUser role){
-        clientService.addRoleToClient(role.getRoleName(),role.getUserName());
+        clientService.addRoleToClient(role.getUserName(), role.getRoleName());
         return ResponseEntity.ok().build();
     }
     @GetMapping("/token/refresh")

@@ -51,7 +51,7 @@ public class DBFilling {
         roleRepository.save(admin);
         roleRepository.save(user);
 
-        Client admin2 = new Client("Tom","admin123", new ArrayList<>());
+        Client admin2 = new Client("Tom","Tom","admin123", new ArrayList<>());
         clientServiceImp.saveAdmin(admin2);
     }
 }

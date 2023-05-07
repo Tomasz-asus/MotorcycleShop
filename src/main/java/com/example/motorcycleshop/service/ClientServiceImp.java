@@ -61,7 +61,7 @@ public class ClientServiceImp implements ClientService, UserDetailsService {
     public void registerClient(Client client, String siteUrl) throws MessagingException, UnsupportedEncodingException {
         if (clientRepository.findByClientName(client.getClientName()).isEmpty()) {
             client.setPassword(passwordEncoder.encode(client.getPassword()));
-            client.getRoles().add(roleRepository.findByRoleName("USER"));
+            client.getRoles().add(roleRepository.findByName("USER"));
             String basketCustomName = MotorcycleService.generate(20);
             Basket basket = new Basket(basketCustomName);
             basketRepository.save(basket);
@@ -96,16 +96,16 @@ public class ClientServiceImp implements ClientService, UserDetailsService {
         mailSender.send(mimeMessage);
     }
     @Override
-    public void addRoleToClient(String clientName, String roleName) {
+    public void addRoleToClient(String clientName, String name) {
         Client client = clientRepository.findByClientName(clientName).orElseThrow(() ->
                 new ClientNotFoundException("Client" + clientName + "was not found"));
-        Role role = roleRepository.findByRoleName(roleName);
+        Role role = roleRepository.findByName(name);
         client.getRoles().add(role);
     }
     @Override
     public Client saveAdmin(Client client) {
         client.setPassword(passwordEncoder.encode(client.getPassword()));
-        client.getRoles().add(roleRepository.findByRoleName("ADMIN"));
+        client.getRoles().add(roleRepository.findByName("ADMIN"));
         String basketCustomName = MotorcycleService.generate(20);
         Basket basket = new Basket(basketCustomName);
         basketRepository.save(basket);
@@ -134,7 +134,7 @@ public class ClientServiceImp implements ClientService, UserDetailsService {
                         .withClaim("isVerified", isClientVerified(client.getClientName()))
                         .withClaim("roles", client.getRoles()
                                 .stream()
-                                .map(Role::getRoleName)
+                                .map(Role::getName)
                                 .collect(Collectors.toList()))
                         .sign(algorithm);
                 Map<String, String> tokens = new HashMap<>();
@@ -180,7 +180,7 @@ public class ClientServiceImp implements ClientService, UserDetailsService {
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         client.getRoles().forEach(role ->
         {
-            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
         });
         return new User(client.getClientName(), client.getPassword(), authorities);
     }

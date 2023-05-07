@@ -22,6 +22,8 @@ public class Client {
     private Long id;
     private String clientName;
 
+    private String userName;
+
     private String password;
 
     private String verificationCode;
@@ -34,8 +36,9 @@ public class Client {
     public Client() {
     }
 
-    public Client(String clientName, String password, Collection<Role> roles) {
+    public Client(String clientName, String userName, String password, Collection<Role> roles) {
         this.clientName = clientName;
+        this.userName = userName;
         this.password = password;
         this.roles = roles;
     }
@@ -46,6 +49,22 @@ public class Client {
 
     public void setVerificationCode(String verificationCode) {
         this.verificationCode = verificationCode;
+    }
+
+    public List<OrderCart> getOrderCarts() {
+        return orderCarts;
+    }
+
+    public void setOrderCarts(List<OrderCart> orderCarts) {
+        this.orderCarts = orderCarts;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public Long getId() {
