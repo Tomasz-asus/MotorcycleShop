@@ -1,64 +1,75 @@
 package com.example.motorcycleshop.DTO;
 
-import com.example.motorcycleshop.model.MotorcycleTyp;
+import com.example.motorcycleshop.model.MotorcycleCategory;
 
 import java.util.Objects;
 
 public class MotorcycleDTO {
 
     private String motorcycleName;
-    private String description;
+    private String motorcycleDescription;
+    private Double motorcyclePrice;
+    private String imageURL;
+    private MotorcycleCategory category;
 
-    private Double price;
-
-    private String yearOfManufacture;
-
-    private String imageUrl;
-
-    private MotorcycleTyp motorcycleTyp;
-
-    public MotorcycleDTO(String motorcycleName, String description, Double price, String yearOfManufacture, String imageUrl, MotorcycleTyp motorcycleTyp) {
+    public MotorcycleDTO(String motorcycleName, String motorcycleDescription, Double motorcyclePrice, String imageURL, MotorcycleCategory category) {
         this.motorcycleName = motorcycleName;
-        this.description = description;
-        this.price = price;
-        this.yearOfManufacture = yearOfManufacture;
-        this.imageUrl = imageUrl;
-        this.motorcycleTyp = motorcycleTyp;
+        this.motorcycleDescription = motorcycleDescription;
+        this.motorcyclePrice = motorcyclePrice;
+        this.imageURL = imageURL;
+        this.category = category;
     }
 
     public String getMotorcycleName() {
         return motorcycleName;
     }
 
-    public String getDescription() {
-        return description;
+    public void setMotorcycleName(String motorcycleName) {
+        this.motorcycleName = motorcycleName;
     }
 
-    public Double getPrice() {
-        return price;
+    public String getMotorcycleDescription() {
+        return motorcycleDescription;
     }
 
-    public String getYearOfManufacture() {
-        return yearOfManufacture;
+    public void setMotorcycleDescription(String motorcycleDescription) {
+        this.motorcycleDescription = motorcycleDescription;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Double getMotorcyclePrice() {
+        return motorcyclePrice;
     }
 
-    public MotorcycleTyp getMotorcycleTyp() {
-        return motorcycleTyp;
+    public void setMotorcyclePrice(Double motorcyclePrice) {
+        this.motorcyclePrice = motorcyclePrice;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public MotorcycleCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(MotorcycleCategory category) {
+        this.category = category;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MotorcycleDTO that)) return false;
-        return Objects.equals(getMotorcycleName(), that.getMotorcycleName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getYearOfManufacture(), that.getYearOfManufacture()) && Objects.equals(getImageUrl(), that.getImageUrl()) && getMotorcycleTyp() == that.getMotorcycleTyp();
+        if (o == null || getClass() != o.getClass()) return false;
+        MotorcycleDTO that = (MotorcycleDTO) o;
+        return Objects.equals(motorcycleName, that.motorcycleName) && Objects.equals(motorcycleDescription, that.motorcycleDescription) && Objects.equals(motorcyclePrice, that.motorcyclePrice) && Objects.equals(imageURL, that.imageURL) && category == that.category;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getMotorcycleName(), getDescription(), getPrice(), getYearOfManufacture(), getImageUrl(), getMotorcycleTyp());
+        return Objects.hash(motorcycleName, motorcycleDescription, motorcyclePrice, imageURL, category);
     }
 }

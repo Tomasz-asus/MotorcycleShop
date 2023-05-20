@@ -12,11 +12,5 @@ public class MotorcycleShopApplication {
 
 }
 
-//TODO Security up 2.7
-//TODO paypal
-//TODO login
-//TODO MICROSERVICE
-//TODO DOCKER COMPOSE
-
 
 

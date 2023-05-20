@@ -3,8 +3,8 @@ package com.example.motorcycleshop.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.motorcycleshop.model.Client;
-import com.example.motorcycleshop.repository.ClientRepository;
+import com.example.motorcycleshop.model.AppUser;
+import com.example.motorcycleshop.repository.AppUserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,12 +25,12 @@ import java.util.stream.Collectors;
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
-    private final ClientRepository clientRepository;
+    private final AppUserRepository userRepo;
     private final AuthenticationManager authenticationManager;
 
 
-    public CustomAuthenticationFilter(ClientRepository clientRepository, AuthenticationManager authenticationManager) {
-        this.clientRepository = clientRepository;
+    public CustomAuthenticationFilter(AppUserRepository userRepo, AuthenticationManager authenticationManager) {
+        this.userRepo = userRepo;
         this.authenticationManager = authenticationManager;
     }
 
@@ -73,20 +73,19 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }
 
-    private Boolean isUserVerified(String clientName) {
-        Client client = this.clientRepository.findByClientName(clientName).orElseThrow();
-        return client.isVerified();
+    private Boolean isUserVerified(String username) {
+        AppUser user = this.userRepo.findByUsername(username).orElseThrow();
+        return user.isVerified();
     }
 
-    String findBasketName(String clientName) {
-        Client client = this.clientRepository.findByClientName(clientName).orElseThrow();
-        return client.getBasket().getBasketName();
+    String findBasketName(String username) {
+        AppUser user = this.userRepo.findByUsername(username).orElseThrow();
+        return user.getBasket().getBasketName();
     }
 
-    String findName(String clientName) {
-        Client client = this.clientRepository.findByClientName
-                (clientName).orElseThrow();
-        return client.getClientName();
+    String findName(String username) {
+        AppUser user = this.userRepo.findByUsername(username).orElseThrow();
+        return user.getName();
     }
 
     public static String get_admin_access_token(String name) {

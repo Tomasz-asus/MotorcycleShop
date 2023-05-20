@@ -1,56 +1,43 @@
 package com.example.motorcycleshop.model;
 
-
-
-
-
 import javax.persistence.*;
 import java.util.List;
-import java.util.Objects;
 
 
 @Entity
 public class Motorcycle {
 
     @Id
-    @SequenceGenerator(name = "motorcycle_sequence")
+    @SequenceGenerator(
+            name = "motorcycle_sequence",
+            sequenceName = "motorcycle_sequence",
+            allocationSize = 1
+    )
     @GeneratedValue(strategy = GenerationType.SEQUENCE,
-    generator = "motorcycle_sequence")
+            generator = "motorcycle_sequence")
     private Long id;
 
     private String motorcycleName;
-    private String description;
-
-    private Double price;
-
-    private String yearOfManufacture;
-
-    private String imageUrl;
+    private String motorcycleDescription;
+    private Double motorcyclePrice;
+    private String imageURL;
 
     @Enumerated(EnumType.STRING)
-    private MotorcycleTyp motorcycleTyp;
+    private MotorcycleCategory category;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    private List<Basket> basketList;
+    private List<Basket> baskets;
 
-    public List<Basket> getBasketList() {
-        return basketList;
-    }
-
-    public void setBasketList(List<Basket> basketList) {
-        this.basketList = basketList;
-    }
 
     public Motorcycle() {
     }
 
-    public Motorcycle(String motorcycleName, String description, Double price, String yearOfManufacture, String imageUrl, MotorcycleTyp motorcycleTyp) {
-        this.motorcycleName = motorcycleName;
-        this.description = description;
-        this.price = price;
-        this.yearOfManufacture = yearOfManufacture;
-        this.imageUrl = imageUrl;
-        this.motorcycleTyp = motorcycleTyp;
+    public Motorcycle(String name, String description, Double price, String pictureURL, MotorcycleCategory category){
+        this.motorcycleName = name;
+        this.motorcycleDescription = description;
+        this.motorcyclePrice = price;
+        this.imageURL = pictureURL;
+        this.category = category;
     }
 
     public Long getId() {
@@ -69,68 +56,56 @@ public class Motorcycle {
         this.motorcycleName = motorcycleName;
     }
 
-    public String getDescription() {
-        return description;
+    public String getMotorcycleDescription() {
+        return motorcycleDescription;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMotorcycleDescription(String motorcycleDescription) {
+        this.motorcycleDescription = motorcycleDescription;
     }
 
-    public Double getPrice() {
-        return price;
+    public Double getMotorcyclePrice() {
+        return motorcyclePrice;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setMotorcyclePrice(Double motorcyclePrice) {
+        this.motorcyclePrice = motorcyclePrice;
     }
 
-    public String getYearOfManufacture() {
-        return yearOfManufacture;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setYearOfManufacture(String yearOfManufacture) {
-        this.yearOfManufacture = yearOfManufacture;
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public MotorcycleCategory getCategory() {
+        return category;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setCategory(MotorcycleCategory category) {
+        this.category = category;
     }
 
-    public MotorcycleTyp getMotorcycleTyp() {
-        return motorcycleTyp;
+    public List<Basket> getBaskets() {
+        return baskets;
     }
 
-    public void setMotorcycleTyp(MotorcycleTyp motorcycleTyp) {
-        this.motorcycleTyp = motorcycleTyp;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Motorcycle that)) return false;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getMotorcycleName(), that.getMotorcycleName()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getPrice(), that.getPrice()) && Objects.equals(getYearOfManufacture(), that.getYearOfManufacture()) && Objects.equals(getImageUrl(), that.getImageUrl()) && getMotorcycleTyp() == that.getMotorcycleTyp();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId(), getMotorcycleName(), getDescription(), getPrice(), getYearOfManufacture(), getImageUrl(), getMotorcycleTyp());
+    public void setBaskets(List<Basket> baskets) {
+        this.baskets = baskets;
     }
 
     @Override
     public String toString() {
         return "Motorcycle{" +
                 "id=" + id +
-                ", name='" + motorcycleName + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", yearOfManufacture='" + yearOfManufacture + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", motorcycleTyp=" + motorcycleTyp +
+                ", motorcycleName='" + motorcycleName + '\'' +
+                ", motorcycleDescription='" + motorcycleDescription + '\'' +
+                ", motorcyclePrice=" + motorcyclePrice +
+                ", imageURL='" + imageURL + '\'' +
+                ", category=" + category +
+ //               ", baskets=" + baskets +
                 '}';
     }
 }

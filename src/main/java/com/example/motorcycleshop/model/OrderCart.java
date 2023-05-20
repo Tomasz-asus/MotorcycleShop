@@ -1,9 +1,5 @@
 package com.example.motorcycleshop.model;
 
-
-
-
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,70 +11,46 @@ public class OrderCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToMany
     private List<Motorcycle> motorcycles = new ArrayList<>();
 
     private String firstAndLastName;
     private String street;
+    private String postalCode;
     private String city;
-
-    private Integer phone;
-
+    private Integer phoneNumber;
     private LocalDateTime orderDate;
-
-    private String userNameOfOrder;
-
+    private String username;
     private String basketName;
 
     public OrderCart() {
     }
 
-    public OrderCart(Long id,
-                     List<Motorcycle> motorcycles,
-                     String firstAndLastName,
-                     String street,
-                     String city,
-                     Integer phone,
-                     LocalDateTime orderDate,
-                     String userNameOfOrder,
-                     String basketName) {
-        this.id = id;
+    public OrderCart(List<Motorcycle> motorcycles, String street, String postalCode,
+                     String city, Integer phoneNumber, LocalDateTime orderDate,
+                     String firstAndLastName, String username, String basketName) {
         this.motorcycles = motorcycles;
-        this.firstAndLastName = firstAndLastName;
         this.street = street;
+        this.postalCode = postalCode;
         this.city = city;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.orderDate = orderDate;
-        this.userNameOfOrder = userNameOfOrder;
+        this.firstAndLastName = firstAndLastName;
+        this.username = username;
         this.basketName = basketName;
     }
-
-    public OrderCart(String basketName, String firstAndLastName, String street, String city, LocalDateTime orderDate, Integer phone, String userNameOfOrder, List<Motorcycle> motorcycles) {
-    }
-
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public List<Motorcycle> getMotorcycles() {
+    public List<Motorcycle> getProducts() {
         return motorcycles;
     }
 
-    public void setMotorcycles(List<Motorcycle> motorcycles) {
+    public void setProducts(List<Motorcycle> motorcycles) {
         this.motorcycles = motorcycles;
-    }
-
-    public String getFirstAndLastName() {
-        return firstAndLastName;
-    }
-
-    public void setFirstAndLastName(String firstAndLastName) {
-        this.firstAndLastName = firstAndLastName;
     }
 
     public String getStreet() {
@@ -89,6 +61,14 @@ public class OrderCart {
         this.street = street;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
     public String getCity() {
         return city;
     }
@@ -97,12 +77,12 @@ public class OrderCart {
         this.city = city;
     }
 
-    public Integer getPhone() {
-        return phone;
+    public Integer getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(Integer phone) {
-        this.phone = phone;
+    public void setPhoneNumber(Integer phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public LocalDateTime getOrderDate() {
@@ -113,12 +93,20 @@ public class OrderCart {
         this.orderDate = orderDate;
     }
 
-    public String getUserNameOfOrder() {
-        return userNameOfOrder;
+    public String getFirstAndLastName() {
+        return firstAndLastName;
     }
 
-    public void setUserNameOfOrder(String userNameOfOrder) {
-        this.userNameOfOrder = userNameOfOrder;
+    public void setFirstAndLastName(String firstAndLastName) {
+        this.firstAndLastName = firstAndLastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getBasketName() {
@@ -129,4 +117,3 @@ public class OrderCart {
         this.basketName = basketName;
     }
 }
-

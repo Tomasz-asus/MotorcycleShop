@@ -1,6 +1,8 @@
 package com.example.motorcycleshop.service;
 
-import com.example.motorcycleshop.model.Client;
+
+
+import com.example.motorcycleshop.model.AppUser;
 import com.example.motorcycleshop.model.Role;
 
 import javax.mail.MessagingException;
@@ -10,23 +12,14 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-public interface ClientService {
+public interface AppUserService {
 
-    void registerClient(Client client, String siteUrl) throws MessagingException, UnsupportedEncodingException;
-
+    void registerUser(AppUser user, String siteUrl) throws MessagingException, UnsupportedEncodingException;
     Role saveRole(Role role);
-
-    void addRoleToClient(String clientName, String roleName);
-
-    Client saveAdmin(Client client);
-
-    Client getClient(String clientName);
-
-    List<Client> getClients();
-
+    void addRoleToUser(String username, String roleName);
+    AppUser saveAdmin(AppUser user);
+    AppUser getAppUser(String username);
+    List<AppUser> getAppUsers();
     boolean verify(String verificationCode);
-
     void refresh(HttpServletRequest request, HttpServletResponse response) throws IOException;
-
-
 }
