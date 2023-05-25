@@ -1,17 +1,18 @@
 package com.example.motorcycleshop.service;
 
-import com.example.motorcycleshop.DTO.MotorcycleDTO;
+import com.example.motorcycleshop.DTO.ProductDTO;
 import com.example.motorcycleshop.DTO.OrderCartDTO;
 import com.example.motorcycleshop.exceptions.BasketNotFoundException;
-import com.example.motorcycleshop.exceptions.MotorcycleNotFoundException;
+import com.example.motorcycleshop.exceptions.ProductAlreadyExistException;
+import com.example.motorcycleshop.exceptions.ProductNotFoundException;
 import com.example.motorcycleshop.exceptions.UserNotFoundException;
 import com.example.motorcycleshop.model.AppUser;
 import com.example.motorcycleshop.model.Basket;
-import com.example.motorcycleshop.model.Motorcycle;
+import com.example.motorcycleshop.model.Product;
 import com.example.motorcycleshop.model.OrderCart;
 import com.example.motorcycleshop.repository.AppUserRepository;
 import com.example.motorcycleshop.repository.BasketRepository;
-import com.example.motorcycleshop.repository.MotorcycleRepository;
+import com.example.motorcycleshop.repository.ProductRepository;
 import com.example.motorcycleshop.repository.OrderCartRepository;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.stereotype.Service;
@@ -23,41 +24,41 @@ import java.util.stream.Collectors;
 @Transactional
 public class MotorcycleShopServiceImpl implements MotorcycleShopService {
 
-    private final MotorcycleRepository motorcycleRepository;
+    private final ProductRepository productRepository;
     private final BasketRepository basketRepository;
     private final OrderCartRepository orderCartRepository;
     private final AppUserRepository appUserRepository;
 
-    public MotorcycleShopServiceImpl(MotorcycleRepository motorcycleRepository, BasketRepository basketRepository, OrderCartRepository orderCartRepository, AppUserRepository appUserRepository) {
-        this.motorcycleRepository = motorcycleRepository;
+    public MotorcycleShopServiceImpl(ProductRepository productRepository, BasketRepository basketRepository, OrderCartRepository orderCartRepository, AppUserRepository appUserRepository) {
+        this.productRepository = productRepository;
         this.basketRepository = basketRepository;
         this.orderCartRepository = orderCartRepository;
         this.appUserRepository = appUserRepository;
     }
 
-    public List<MotorcycleDTO> getAllMotorcycles() {
-        return motorcycleRepository.findAll().stream()
-                .map(MotorcycleMapper::fromEntity)
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll().stream()
+                .map(ProductMapper::fromEntity)
                 .collect(Collectors.toList());
     }
 
-    public MotorcycleDTO addMotorcycle(MotorcycleDTO motorcycleDTO) {
-        if (motorcycleRepository.findByMotorcycleName(motorcycleDTO.getMotorcycleName()).isPresent()) {
-            throw new RuntimeException("");
+    public ProductDTO addProduct(ProductDTO productDTO) {
+        if (productRepository.findByProductName(productDTO.getProductName()).isPresent()) {
+            throw new ProductAlreadyExistException("Product Already Exist");
         } else {
-            Motorcycle save = motorcycleRepository.save(MotorcycleMapper.fromDTO(motorcycleDTO));
-            return MotorcycleMapper.fromEntity(save);
+            Product save = productRepository.save(ProductMapper.fromDTO(productDTO));
+            return ProductMapper.fromEntity(save);
         }
     }
 
-    public void deleteMotorcycle(String name) {
-        motorcycleRepository.findByMotorcycleName(name).orElseThrow(() ->
-                new MotorcycleNotFoundException("Not found"));
-        motorcycleRepository.deleteByMotorcycleName(name);
+    public void deleteProduct(String name) {
+        productRepository.findByProductName(name).orElseThrow(() ->
+                new ProductNotFoundException("Product not found"));
+        productRepository.deleteByProductName(name);
     }
 
     public void clearProductsList() {
-        motorcycleRepository.deleteAll();
+        productRepository.deleteAll();
     }
 
     public List<Basket> getAllBaskets() {
@@ -72,36 +73,31 @@ public class MotorcycleShopServiceImpl implements MotorcycleShopService {
         basketRepository.deleteByBasketName(name);
     }
 
-    public void deleteMotorcycleFromBasket(String basket, String motorcycleName) {
+    public void deleteProductFromBasket(String basket, String productName) {
         Basket basketEntity = basketRepository.findByBasketName(basket).orElseThrow(()
                 -> new BasketNotFoundException("Basket: " + basket + ", was not found"));
-        Motorcycle byMotorcycleName = motorcycleRepository.findByMotorcycleName(motorcycleName).orElseThrow(()
-                -> new MotorcycleNotFoundException("Motorcycle: " + motorcycleName + " is not present in database."));
-        if (!basketEntity.getMotorcycles().contains(byMotorcycleName)) {
-            throw new MotorcycleNotFoundException("Motorcycle: " + motorcycleName + " is not present.");
+        Product byProductName = productRepository.findByProductName(productName).orElseThrow(()
+                -> new ProductNotFoundException("Product: " + productName + " is not present in database."));
+        if (!basketEntity.getProducts().contains(byProductName)) {
+            throw new ProductNotFoundException("Product: " + productName + " is not present.");
         }
-        basketEntity.removeMotorcycleFromBasket(byMotorcycleName);
+        basketEntity.removeProductFromBasket(byProductName);
         basketRepository.save(basketEntity);
     }
 
-    @Override
-    public void clearMotorcyclesList() {motorcycleRepository.deleteAll();
-
-    }
-
-    public void addProductToBasket(String basketName, String motorcycleName) {
+    public void addProductToBasket(String basketName, String productName) {
         Basket basket = basketRepository.findByBasketName(basketName).orElseThrow(()
                 -> new BasketNotFoundException("Basket" + basketName + "was not found"));
-        Motorcycle motorcycle = motorcycleRepository.findByMotorcycleName(motorcycleName).orElseThrow(
-                () -> new MotorcycleNotFoundException("Motorcycle: " + motorcycleName + ", was not found"));
-        basket.getMotorcycles().add(motorcycle);
+        Product product = productRepository.findByProductName(productName).orElseThrow(
+                () -> new ProductNotFoundException("Product: " + productName + ", was not found"));
+        basket.getProducts().add(product);
         basketRepository.save(basket);
     }
 
-    public List<Motorcycle> getAllMotorcyclesFromBasket(String basketName) {
+    public List<Product> getALlProductsFromBasket(String basketName) {
         return basketRepository.findByBasketName(basketName)
                 .orElseThrow(() -> new BasketNotFoundException("Basket: " + basketName + ", was not found."))
-                .getMotorcycles();
+                .getProducts();
     }
 
     public OrderCartDTO addOrder(OrderCartDTO orderDTO) {

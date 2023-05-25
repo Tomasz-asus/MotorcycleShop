@@ -1,7 +1,7 @@
 package com.example.motorcycleshop.service;
 
 import com.example.motorcycleshop.DTO.OrderCartDTO;
-import com.example.motorcycleshop.model.Motorcycle;
+import com.example.motorcycleshop.model.Product;
 import com.example.motorcycleshop.model.OrderCart;
 import com.example.motorcycleshop.repository.AppUserRepository;
 import com.example.motorcycleshop.repository.BasketRepository;
@@ -23,7 +23,7 @@ public class OrderCartMapper {
 
     public static OrderCart fromDTO(OrderCartDTO orderCartDTO) {
 
-        return new OrderCart(mappingMotorcyclesFromBasket(orderCartDTO.getBasketName()),
+        return new OrderCart(mappingProductsFromBasket(orderCartDTO.getBasketName()),
                 orderCartDTO.getStreet(),
                 orderCartDTO.getPostalCode(),
                 orderCartDTO.getCity(),
@@ -46,8 +46,8 @@ public class OrderCartMapper {
                 orderCart.getPhoneNumber());
     }
 
-    private static List<Motorcycle> mappingMotorcyclesFromBasket(String basketName) {
-        return new ArrayList<>(basketRepository.findByBasketName(basketName).get().getMotorcycles());
+    private static List<Product> mappingProductsFromBasket(String basketName) {
+        return new ArrayList<>(basketRepository.findByBasketName(basketName).get().getProducts());
     }
 
 }

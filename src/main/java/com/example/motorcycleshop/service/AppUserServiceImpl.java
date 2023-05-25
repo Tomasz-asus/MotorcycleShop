@@ -85,13 +85,11 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
             user.setBasket(basketRepository.findByBasketName(basketCustomName).get());
             String randomCode = RandomString.make(64);
             user.setVerificationCode(randomCode);
-            sendVerificationEmail(user, siteUR);
+//            sendVerificationEmail(user, siteUR);
             appUserRepository.save(user);
         } else {
             throw new UserAlreadyExistException("User " + user.getUsername()+ " already exist.");
         }
-
-
     }
 
     @Override
@@ -155,11 +153,13 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getUsername();
         String fromAddress = "tomaszojava@gmail.com";
-        String senderName = "MotorcycleShop";
-        String subject = "Welcome to MotorcycleShop";
+        String senderName = "MotoShop";
+        String subject = "Please verify your registration";
         String content = "Dear [[name]],<br>"
+                + "Please click the link below to verify your registration:<br>"
+                + "<h3><a href=\"[[URL]]\" target=\"_self\">VERIFY</a></h3>"
                 + "Thank you,<br>"
-                + "MotorcycleShop.";
+                + "MotoShop.";
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
@@ -205,6 +205,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         if (appUser == null || appUser.isVerified()) {
             return false;
         } else {
+            appUser.setVerificationCode(passwordEncoder.encode(appUser.getPassword()));
             appUser.setVerificationCode(null);
             appUser.setVerified(true);
             appUserRepository.save(appUser);

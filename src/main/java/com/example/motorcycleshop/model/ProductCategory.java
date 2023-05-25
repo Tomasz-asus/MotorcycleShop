@@ -1,7 +1,8 @@
 package com.example.motorcycleshop.model;
 
-public enum MotorcycleCategory {
+public enum ProductCategory {
     SPORT,
     TOURING,
-    CHOPPER
+    CHOPPER,
+    MODEL
 }

@@ -1,34 +1,34 @@
 package com.example.motorcycleshop.service;
 
-import com.example.motorcycleshop.DTO.MotorcycleDTO;
+import com.example.motorcycleshop.DTO.ProductDTO;
 import com.example.motorcycleshop.DTO.OrderCartDTO;
-import com.example.motorcycleshop.exceptions.MotorcycleNotFoundException;
+import com.example.motorcycleshop.exceptions.ProductNotFoundException;
 import com.example.motorcycleshop.model.Basket;
-import com.example.motorcycleshop.model.Motorcycle;
+import com.example.motorcycleshop.model.Product;
 
 import java.util.List;
 
 public interface MotorcycleShopService {
 
-    MotorcycleDTO addMotorcycle(MotorcycleDTO motorcycleDTO) throws MotorcycleNotFoundException;
+    ProductDTO addProduct(ProductDTO productAlt);
 
-    List<MotorcycleDTO> getAllMotorcycles();
+    List<ProductDTO> getAllProducts();
 
     List<Basket> getAllBaskets();
 
-    void deleteMotorcycle(String name);
+    void deleteProduct(String name);
 
     void deleteBasket(String name);
 
-    void deleteMotorcycleFromBasket(String basket, String productName);
+    void deleteProductFromBasket(String basket, String productName);
 
-    void clearMotorcyclesList();
+    void clearProductsList();
 
     void addBasket(Basket basket);
 
     void addProductToBasket(String basketName, String productName);
 
-    List<Motorcycle> getAllMotorcyclesFromBasket(String basketName);
+    List<Product> getALlProductsFromBasket(String basketName);
 
     OrderCartDTO addOrder(OrderCartDTO orderDTO);
 }

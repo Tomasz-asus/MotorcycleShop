@@ -13,7 +13,7 @@ public class OrderCart {
     private Long id;
 
     @ManyToMany
-    private List<Motorcycle> motorcycles = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     private String firstAndLastName;
     private String street;
@@ -27,10 +27,10 @@ public class OrderCart {
     public OrderCart() {
     }
 
-    public OrderCart(List<Motorcycle> motorcycles, String street, String postalCode,
+    public OrderCart(List<Product> products, String street, String postalCode,
                      String city, Integer phoneNumber, LocalDateTime orderDate,
                      String firstAndLastName, String username, String basketName) {
-        this.motorcycles = motorcycles;
+        this.products = products;
         this.street = street;
         this.postalCode = postalCode;
         this.city = city;
@@ -45,12 +45,12 @@ public class OrderCart {
         return id;
     }
 
-    public List<Motorcycle> getProducts() {
-        return motorcycles;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProducts(List<Motorcycle> motorcycles) {
-        this.motorcycles = motorcycles;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public String getStreet() {

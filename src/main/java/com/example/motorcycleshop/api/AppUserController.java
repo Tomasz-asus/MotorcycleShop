@@ -1,6 +1,5 @@
 package com.example.motorcycleshop.api;
 
-
 import com.example.motorcycleshop.model.AppUser;
 import com.example.motorcycleshop.model.Role;
 import com.example.motorcycleshop.model.RoleToUserForm;
@@ -18,6 +17,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api")
 public class AppUserController {
@@ -27,7 +27,6 @@ public class AppUserController {
     public AppUserController(AppUserService appUserService) {
         this.appUserService = appUserService;
     }
-
     @PostMapping("/user")
     @ResponseBody()
     public ResponseEntity<?> registerUser(@RequestBody AppUser appUser, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
