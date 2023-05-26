@@ -8,13 +8,7 @@ import java.util.List;
 public class Basket {
 
     @Id
-    @SequenceGenerator(
-            name = "basket_sequence",
-            sequenceName = "basket_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-            generator = "basket_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
