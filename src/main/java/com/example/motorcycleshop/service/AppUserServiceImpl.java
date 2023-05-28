@@ -85,7 +85,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
             user.setBasket(basketRepository.findByBasketName(basketCustomName).get());
             String randomCode = RandomString.make(64);
             user.setVerificationCode(randomCode);
-//            sendVerificationEmail(user, siteUR);
+ //           sendVerificationEmail(user, siteUR);
             appUserRepository.save(user);
         } else {
             throw new UserAlreadyExistException("User " + user.getUsername()+ " already exist.");
