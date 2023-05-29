@@ -94,6 +94,7 @@ class AppUserControllerTest {
         String json = objectMapper.writeValueAsString(appUser);
 
         //WHEN
+
         MvcResult mvcResult = this.mockMvc.perform(post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json)
