@@ -2,7 +2,6 @@ package com.example.motorcycleshop.service;
 
 import com.example.motorcycleshop.DTO.ProductDTO;
 import com.example.motorcycleshop.DTO.OrderCartDTO;
-import com.example.motorcycleshop.exceptions.ProductNotFoundException;
 import com.example.motorcycleshop.model.Basket;
 import com.example.motorcycleshop.model.Product;
 
