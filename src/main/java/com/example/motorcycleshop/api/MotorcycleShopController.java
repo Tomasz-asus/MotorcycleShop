@@ -14,8 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/shop")
-public class MotorcycleShopController
-{
+public class MotorcycleShopController {
 
     private final MotorcycleShopService motorcycleShopService;
 
