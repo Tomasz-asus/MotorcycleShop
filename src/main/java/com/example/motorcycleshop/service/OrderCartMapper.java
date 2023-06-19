@@ -16,11 +16,9 @@ public class OrderCartMapper {
 
     private static BasketRepository basketRepository;
 
-
     public OrderCartMapper(BasketRepository basketRepository, AppUserRepository appUserRepository) {
         OrderCartMapper.basketRepository = basketRepository;
     }
-
     public static OrderCart fromDTO(OrderCartDTO orderCartDTO) {
 
         return new OrderCart(mappingProductsFromBasket(orderCartDTO.getBasketName()),
@@ -34,7 +32,6 @@ public class OrderCartMapper {
                 orderCartDTO.getBasketName()
         );
     }
-
     public static OrderCartDTO fromEntity(OrderCart orderCart) {
 
         return new OrderCartDTO(orderCart.getUsername(),
@@ -45,9 +42,7 @@ public class OrderCartMapper {
                 orderCart.getCity(),
                 orderCart.getPhoneNumber());
     }
-
     private static List<Product> mappingProductsFromBasket(String basketName) {
         return new ArrayList<>(basketRepository.findByBasketName(basketName).get().getProducts());
     }
-
 }

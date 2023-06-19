@@ -32,5 +32,4 @@ public class MotorcycleShopConfig {
         source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(source);
     }
-
 }

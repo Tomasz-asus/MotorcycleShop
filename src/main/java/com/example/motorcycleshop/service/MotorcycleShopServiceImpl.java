@@ -35,13 +35,11 @@ public class MotorcycleShopServiceImpl implements MotorcycleShopService {
         this.orderCartRepository = orderCartRepository;
         this.appUserRepository = appUserRepository;
     }
-
     public List<ProductDTO> getAllProducts() {
         return productRepository.findAll().stream()
                 .map(ProductMapper::fromEntity)
                 .collect(Collectors.toList());
     }
-
     public ProductDTO addProduct(ProductDTO productDTO) {
         if (productRepository.findByProductName(productDTO.getProductName()).isPresent()) {
             throw new ProductAlreadyExistException("Product Already Exist");
@@ -50,29 +48,23 @@ public class MotorcycleShopServiceImpl implements MotorcycleShopService {
             return ProductMapper.fromEntity(save);
         }
     }
-
     public void deleteProduct(String name) {
         productRepository.findByProductName(name).orElseThrow(() ->
                 new ProductNotFoundException("Product not found"));
         productRepository.deleteByProductName(name);
     }
-
     public void clearProductsList() {
         productRepository.deleteAll();
     }
-
     public List<Basket> getAllBaskets() {
         return basketRepository.findAll();
     }
-
     public void addBasket(Basket basket) {
         basketRepository.save(basket);
     }
-
     public void deleteBasket(String name) {
         basketRepository.deleteByBasketName(name);
     }
-
     public void deleteProductFromBasket(String basket, String productName) {
         Basket basketEntity = basketRepository.findByBasketName(basket).orElseThrow(()
                 -> new BasketNotFoundException("Basket: " + basket + ", was not found"));
@@ -84,7 +76,6 @@ public class MotorcycleShopServiceImpl implements MotorcycleShopService {
         basketEntity.removeProductFromBasket(byProductName);
         basketRepository.save(basketEntity);
     }
-
     public void addProductToBasket(String basketName, String productName) {
         Basket basket = basketRepository.findByBasketName(basketName).orElseThrow(()
                 -> new BasketNotFoundException("Basket" + basketName + "was not found"));
@@ -93,13 +84,11 @@ public class MotorcycleShopServiceImpl implements MotorcycleShopService {
         basket.getProducts().add(product);
         basketRepository.save(basket);
     }
-
     public List<Product> getALlProductsFromBasket(String basketName) {
         return basketRepository.findByBasketName(basketName)
                 .orElseThrow(() -> new BasketNotFoundException("Basket: " + basketName + ", was not found."))
                 .getProducts();
     }
-
     public OrderCartDTO addOrder(OrderCartDTO orderDTO) {
         OrderCart save = orderCartRepository.save(OrderCartMapper.fromDTO(orderDTO));
         AppUser appUser = appUserRepository.findByUsername(orderDTO.getUsername()).orElseThrow(()
@@ -113,5 +102,4 @@ public class MotorcycleShopServiceImpl implements MotorcycleShopService {
         appUserRepository.save(appUser);
         return OrderCartMapper.fromEntity(save);
     }
-
 }

@@ -33,7 +33,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         this.userRepo = userRepo;
         this.authenticationManager = authenticationManager;
     }
-
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         String username = request.getParameter("username");
@@ -42,7 +41,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
         return authenticationManager.authenticate(authenticationToken);
     }
-
     @Override
     protected void successfulAuthentication(HttpServletRequest request,
                                             HttpServletResponse response, FilterChain chain,
@@ -72,22 +70,18 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
     }
-
     private Boolean isUserVerified(String username) {
         AppUser user = this.userRepo.findByUsername(username).orElseThrow();
         return user.isVerified();
     }
-
     String findBasketName(String username) {
         AppUser user = this.userRepo.findByUsername(username).orElseThrow();
         return user.getBasket().getBasketName();
     }
-
     String findName(String username) {
         AppUser user = this.userRepo.findByUsername(username).orElseThrow();
         return user.getName();
     }
-
     public static String get_admin_access_token(String name) {
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
         List<String> roles = new ArrayList<>();

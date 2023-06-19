@@ -27,7 +27,6 @@ public class DbFilling {
         this.appUserService = appUserService;
         this.roleRepository = roleRepository;
     }
-
     @EventListener(ApplicationReadyEvent.class)
     public void doSomethingAfterStartup() {
 
@@ -40,7 +39,6 @@ public class DbFilling {
         controller.addProduct(new ProductDTO("KTM 690", "Mini KTM 690", 99.00,
                 "https://motomoda24.pl/wp-content/uploads/2021/10/maisto-model-ktm-690.jpg",
                 ProductCategory.SPORT));
-
 
         Role admin = new Role("ROLE_ADMIN");
         Role user = new Role("ROLE_USER");

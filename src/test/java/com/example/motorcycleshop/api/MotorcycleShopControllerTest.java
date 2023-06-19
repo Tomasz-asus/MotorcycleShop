@@ -51,102 +51,83 @@ public class MotorcycleShopControllerTest {
         //GIVEN
         productRepository.save(new Product("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT));
         productRepository.save(new Product("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT));
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(get("/shop/products")).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
-
         //THEN
 
         assertThat(products.size()).isEqualTo(2);
     }
-
     @Test
     public void shouldGetTheSameProductsAsGiven() throws Exception {
         //GIVEN
         productRepository.save(new Product("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT));
         productRepository.save(new Product("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT));
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(get("/shop/products")).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
-
         //THEN
         assertThat(products).containsExactlyInAnyOrder(
                 new ProductDTO("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT),
                 new ProductDTO("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT));
     }
-
     @Test
     public void shouldAddProductToDatabase() throws Exception {
         //GIVEN
         ProductDTO productDTO =
                 new ProductDTO("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT);
         String json = objectMapper.writeValueAsString(productDTO);
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(post("/shop/product")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json))
                 .andReturn();
         int status = mvcResult.getResponse().getStatus();
-
         //THEN
         assertThat(status).isEqualTo(201);
         assertThat(ProductMapper.fromEntity(productRepository.findByProductName("Yamaha").get())).isEqualTo(productDTO);
     }
-
     @Test
     public void shouldRemoveProductFromDatabase() throws Exception {
         //GIVEN
         productRepository.save(new Product("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT));
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(delete("/shop/product/Yamaha")).andReturn();
         int status = mvcResult.getResponse().getStatus();
-
         //THEN
         assertThat(status).isEqualTo(202);
         assertThat(productRepository.findAll().size()).isEqualTo(0);
     }
-
     @Test
     public void shouldAddProductToBasket() throws Exception {
         //GIVEN
         productRepository.save(new Product("Yamaha", "yamaha", 1., "link", ProductCategory.SPORT));
         basketRepository.save(new Basket("testBasket"));
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(post("/shop/product/toBasket/testBasket/Yamaha")).andReturn();
         int status = mvcResult.getResponse().getStatus();
         int productListSize = basketRepository.findByBasketName("testBasket").get().getProducts().size();
-
         //THEN
         assertThat(status).isEqualTo(202);
         assertThat(productListSize).isEqualTo(1);
     }
-
     @Test
     public void shouldGetAllBaskets() throws Exception {
         //GIVEN
         basketRepository.save(new Basket("testBasket1"));
         basketRepository.save(new Basket("testBasket2"));
-
         //WHEN
-
         MvcResult mvcResult = this.mockMvc.perform(get("/shop/baskets")).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<Basket> baskets = Arrays.asList(objectMapper.readValue(contentAsString, Basket[].class));
-
         //THEN
         assertThat(baskets.size()).isEqualTo(2);
     }
-
     @Test
     public void shouldRemoveProductFromBasket() throws Exception {
         //GIVEN
@@ -154,34 +135,26 @@ public class MotorcycleShopControllerTest {
         Basket basket = new Basket("testBasket");
         basket.addProductToBasket(product);
         basketRepository.save(basket);
-
         //
         MvcResult mvcResult = this.mockMvc.perform(delete("/shop/product/fromBasket/testBasket/Yamaha")).andReturn();
         int status = mvcResult.getResponse().getStatus();
         int size = basketRepository.findByBasketName("testBasket").get().getProducts().size();
-
         //THEN
-
         assertThat(status).isEqualTo(202);
         assertThat(size).isEqualTo(0);
     }
-
     @Test
     public void shouldRemoveBasketFromDatabase() throws Exception {
         //GIVEN
         basketRepository.save(new Basket("testBasket"));
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(delete("/shop/basket/testBasket")).andReturn();
         int status = mvcResult.getResponse().getStatus();
         int basketNumber = basketRepository.findAll().size();
-
         //THEN
-
         assertThat(status).isEqualTo(202);
         assertThat(basketNumber).isEqualTo(0);
     }
-
     @Test
     public void shouldGetAllProductsFromBasket() throws Exception {
         //GIVEN
@@ -191,17 +164,14 @@ public class MotorcycleShopControllerTest {
         basket.addProductToBasket(productFirst);
         basket.addProductToBasket(productSecond);
         basketRepository.save(basket);
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(get("/shop/products/fromBasket/testBasket")).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<ProductDTO> products = Arrays.asList(objectMapper.readValue(contentAsString, ProductDTO[].class));
-
         //THEN
         assertThat(products.size()).isEqualTo(2);
     }
-
     @Test()
     public void shouldMakeOrder() throws Exception {
         //GIVEN
@@ -215,7 +185,6 @@ public class MotorcycleShopControllerTest {
         OrderCartDTO orderCartDTO = new OrderCartDTO("test", "test test", "testBasket",
                 "street", "postalCode", "testCity", 111111111);
         String json = objectMapper.writeValueAsString(orderCartDTO);
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(post("/shop/order")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -225,7 +194,6 @@ public class MotorcycleShopControllerTest {
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         OrderCartDTO responseOrderCartDTO = objectMapper.readValue(contentAsString, OrderCartDTO.class);
-
         //THEN
         assertThat(status).isEqualTo(201);
         assertThat(responseOrderCartDTO).isEqualTo(orderCartDTO);

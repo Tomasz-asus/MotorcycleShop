@@ -71,7 +71,6 @@ class AppUserControllerTest {
 
         appUserService.addRoleToUser("nam1@gmail.com", "ROLE_USER");
         appUserService.addRoleToUser("nam2@gmail.com", "ROLE_USER");
-
         //WHEN
         String token = CustomAuthenticationFilter.get_admin_access_token("tomaszojava@gmail.com");
         MvcResult mvcResult = this.mockMvc.perform(get("/api/users")
@@ -80,33 +79,27 @@ class AppUserControllerTest {
         MockHttpServletResponse response = mvcResult.getResponse();
         String contentAsString = response.getContentAsString();
         List<AppUser> users = Arrays.asList(objectMapper.readValue(contentAsString, AppUser[].class));
-
         //THEN
         assertNotNull(token);
         assertThat(users.size()).isEqualTo(2);
     }
-
     @Test
     public void shouldSaveUser() throws Exception {
         //GIVEN
         roleRepository.save(new Role("ROLE_USER"));
         AppUser appUser = new AppUser("name", "tomaszojava@gmail.com", "password", new ArrayList<>());
         String json = objectMapper.writeValueAsString(appUser);
-
         //WHEN
-
         MvcResult mvcResult = this.mockMvc.perform(post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content(json)
                         .servletPath("/api/user"))
                 .andReturn();
         int status = mvcResult.getResponse().getStatus();
-
         //THEN
         assertThat(status).isEqualTo(201);
         assertThat(appUserRepository.findAll().size()).isEqualTo(1);
     }
-
     @Test
     public void shouldVerifyUser() throws Exception {
         //GIVEN
@@ -118,23 +111,19 @@ class AppUserControllerTest {
         userOne.setVerificationCode(randomCode);
         appUserRepository.save(userOne);
         appUserService.addRoleToUser("tomaszojava@gmail.com", "ROLE_USER");
-
         //WHEN
         MvcResult mvcResult = this.mockMvc.perform(get("/api/verify?code=" + randomCode)).andReturn();
         int status = mvcResult.getResponse().getStatus();
         String body = mvcResult.getResponse().getContentAsString();
-
         //THEN
         assertThat(status).isEqualTo(200);
         assertThat(body).isEqualTo("verify_success");
     }
-
     @Test
     public void shouldAddRole() throws Exception {
         //GIVEN
         Role role = new Role("ROLE_USER");
         String json = objectMapper.writeValueAsString(role);
-
         //WHEN
         String token = CustomAuthenticationFilter.get_admin_access_token("tomaszojava@gmail.com");
         MvcResult mvcResult = this.mockMvc.perform(post("/api/role")
@@ -143,12 +132,10 @@ class AppUserControllerTest {
                         .content(json))
                 .andReturn();
         int status = mvcResult.getResponse().getStatus();
-
         //THEN
         assertThat(status).isEqualTo(201);
         assertThat(roleRepository.findAll().size()).isEqualTo(1);
     }
-
     @Test
     public void shouldAddRoleToUser() throws Exception {
         //GIVEN
@@ -161,7 +148,6 @@ class AppUserControllerTest {
         appUserRepository.save(user);
 
         String json = objectMapper.writeValueAsString(new RoleToUserForm("tomaszojava@gmail.com", "ROLE_ADMIN"));
-
         //WHEN
         String token = CustomAuthenticationFilter.get_admin_access_token("tomaszojava@gmail.com");
         MvcResult mvcResult = this.mockMvc.perform(post("/api/role/toUser")
@@ -170,7 +156,6 @@ class AppUserControllerTest {
                         .content(json))
                 .andReturn();
         int status = mvcResult.getResponse().getStatus();
-
         //THEN
         assertThat(status).isEqualTo(200);
         assertThat(roleRepository.findByName("ROLE_ADMIN")).isSameAs(role);

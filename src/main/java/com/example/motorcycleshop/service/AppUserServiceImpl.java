@@ -60,7 +60,6 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         this.passwordEncoder = passwordEncoder;
         this.basketRepository = basketRepository;
     }
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser appUser = appUserRepository.findByUsername(username).orElseThrow(() ->
@@ -73,7 +72,6 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         });
         return new User(appUser.getUsername(), appUser.getPassword(), authorities);
     }
-
     @Override
     public void registerUser(AppUser user, String siteUR) throws MessagingException, UnsupportedEncodingException {
         if (appUserRepository.findByUsername(user.getUsername()).isEmpty()) {
@@ -91,7 +89,6 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
             throw new UserAlreadyExistException("User " + user.getUsername()+ " already exist.");
         }
     }
-
     @Override
     public AppUser saveAdmin(AppUser user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -104,9 +101,6 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         user.setVerified(true);
         return appUserRepository.save(user);
     }
-
-
-
     @Override
     public void refresh(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String authorizationHeader = request.getHeader(AUTHORIZATION);
@@ -145,10 +139,8 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
             }
         } else {
             throw new RuntimeException("Refresh Token is Missing");
-
         }
     }
-
     private void sendVerificationEmail(AppUser user, String siteURL)
             throws MessagingException, UnsupportedEncodingException {
         String toAddress = user.getUsername();
@@ -172,9 +164,7 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         content = content.replace("[[URL]]", verifyURL);
         helper.setText(content, true);
         mailSender.send(message);
-
     }
-
     @Override
     public Role saveRole(Role role) {
         return roleRepository.save(role);
@@ -187,7 +177,6 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
         Role role = roleRepository.findByName(roleName);
         user.getRoles().add(role);
     }
-
     @Override
     public AppUser getAppUser(String username) {
         return appUserRepository.findByUsername(username).orElseThrow();
@@ -212,17 +201,14 @@ public class AppUserServiceImpl implements AppUserService, UserDetailsService {
             return true;
         }
     }
-
     private Boolean isUserVerified(String username) {
         AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
         return user.isVerified();
     }
-
     String findBasketName(String username) {
         AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
         return user.getBasket().getBasketName();
     }
-
     String findName(String username) {
         AppUser user = this.appUserRepository.findByUsername(username).orElseThrow();
         return user.getName();
