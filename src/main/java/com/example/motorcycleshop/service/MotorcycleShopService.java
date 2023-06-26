@@ -21,3 +21,4 @@ public interface MotorcycleShopService {
     List<Product> getALlProductsFromBasket(String basketName);
     OrderCartDTO addOrder(OrderCartDTO orderDTO);
 }
+

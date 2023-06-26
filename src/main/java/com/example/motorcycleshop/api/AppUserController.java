@@ -17,7 +17,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api")
 public class AppUserController {
